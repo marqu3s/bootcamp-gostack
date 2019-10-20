@@ -1,9 +1,12 @@
 import { Router } from 'express';
 
-const routes = new Router();
+// Import controllers here.
+import SessionController from './app/controllers/SessionController';
+import UserController from './app/controllers/UserController';
 
-routes.get('/', (req, res) => {
-  return res.json({ message: 'Hi Men' });
-});
+// Routes.
+const routes = new Router();
+routes.post('/sessions', SessionController.store);
+routes.post('/users', UserController.store);
 
 export default routes;

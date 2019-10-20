@@ -1,6 +1,10 @@
 import express from 'express';
 import routes from './routes';
 
+// Execute the database configuration.
+// No need to access the returned data.
+import './database/index';
+
 class App {
   constructor() {
     this.server = express();
