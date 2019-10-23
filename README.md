@@ -2,7 +2,7 @@
 
 ## Technologies used
 - [NodeJS](https://nodejs.org)
-- [ReactJS](httpd://reactjs.org)
+- [ReactJS](https://reactjs.org)
 - [React Native](https://facebook.github.io/react-native/)
 
 ## Tools used
