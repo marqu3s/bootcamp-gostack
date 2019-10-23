@@ -26,13 +26,12 @@ class UserController {
 
     // User doesn't exists. Create it.
     // const user = await User.create(req.body); // return full user data
-    const { id, name, email, provider } = await User.create(req.body); // return only selected data
+    const { id, name, email } = await User.create(req.body); // return only selected data
 
     return res.json({
       id,
       name,
       email,
-      provider,
     });
   }
 
