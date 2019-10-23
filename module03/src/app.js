@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import routes from './routes';
 
 // Execute the database configuration.
@@ -14,6 +15,12 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+
+    // Static route for the avatars
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {
