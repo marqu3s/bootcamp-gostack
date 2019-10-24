@@ -1,11 +1,11 @@
 # Bootcamp GoStack
 
-## Technologies used
+## TECHNOLOGIES USED
 - [NodeJS](https://nodejs.org)
 - [ReactJS](https://reactjs.org)
 - [React Native](https://facebook.github.io/react-native/)
 
-## Tools used
+## TOOLS USED
 - [VSCode](https://code.visualstudio.com/): Microsoft Visual Studio Code IDE.
 - [Insomnia](https://insomnia.rest/): REST client to debug APIs. 
 - [Postbird](https://electronjs.org/apps/postbird): PostgreSQL GUI client.
@@ -13,7 +13,7 @@
 - [Docker](https://www.docker.com/): Container engine to automate application development and deployment.
 - [EditorConfig](https://editorconfig.org/): EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.
 
-## Yarn packages dependencies used
+## YARN PACKAGES USED
 - [Bcrypt](https://www.npmjs.com/package/bcryptjs): Bcrypt in JavaScript with zero dependencies.
 - [EsLint](https://eslint.org/): The pluggable linting utility for JavaScript and JSX.
 - [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
@@ -28,7 +28,7 @@
 
 ---
 
-## Installing the dependencies
+## INSTALLING DEPENDENCIES
 
 ### Yarn command to install dependencies on a new project
 ```
@@ -48,7 +48,7 @@ After eslint installs it's NPM dependencies, remove the __package-lock.json__ fi
 
 ---
 
-## Migrations
+## MIGRATIONS
 
 
 ### Creating migrations
@@ -64,4 +64,10 @@ yarn sequelize db:migrate
 ### Undoing migrations
 ```
 yarn sequelize db:migrate:undo[:all]
+```
+
+## DOCKER COMMANDS
+```
+docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11.5
+docker run --name mongobarber -p 27017:27017 -d -t mongo
 ```
