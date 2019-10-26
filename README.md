@@ -14,9 +14,11 @@
 - [EditorConfig](https://editorconfig.org/): EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.
 - [Mailtrap](https://mailtrap.io/): Safe Email Testing for Staging & Development.
 - [Handlebars](https://handlebarsjs.com/): Build semantic templates effectively with no frustration.
+- [Redis](https://redis.io/): In-memory data structure store, used as a database, cache and message broker.
 
 ## YARN PACKAGES USED
 - [Bcrypt](https://www.npmjs.com/package/bcryptjs): Bcrypt in JavaScript with zero dependencies.
+- [Bee-queue](https://github.com/bee-queue/bee-queue): A simple, fast, robust job/task queue for Node.js, backed by Redis.
 - [Date-fns](https://date-fns.org/): Modern Javascript date utility library.
 - [EsLint](https://eslint.org/): The pluggable linting utility for JavaScript and JSX.
 - [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
@@ -39,7 +41,7 @@
 
 ### Yarn command to install dependencies on a new project
 ```
-yarn add bcryptjs express jsonwebtoken pg pg-hstore sequelize yup
+yarn add bcryptjs bee-queue date-fns express jsonwebtoken mongoose nodemailer pg pg-hstore sequelize yup
 ```
 
 ### Yarn command to install developer dependencies on a new project
@@ -77,4 +79,5 @@ yarn sequelize db:migrate:undo[:all]
 ```
 docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11.5
 docker run --name mongobarber -p 27017:27017 -d -t mongo
+docker run --name redisbarber -p 6379:6379 -d -t redis:alpine
 ```
