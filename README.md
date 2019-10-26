@@ -12,17 +12,24 @@
 - [DevDocs](https://devdocs.egoist.moe/): DevDocs Desktop client.
 - [Docker](https://www.docker.com/): Container engine to automate application development and deployment.
 - [EditorConfig](https://editorconfig.org/): EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.
+- [Mailtrap](https://mailtrap.io/): Safe Email Testing for Staging & Development.
+- [Handlebars](https://handlebarsjs.com/): Build semantic templates effectively with no frustration.
 
 ## YARN PACKAGES USED
 - [Bcrypt](https://www.npmjs.com/package/bcryptjs): Bcrypt in JavaScript with zero dependencies.
+- [Date-fns](https://date-fns.org/): Modern Javascript date utility library.
 - [EsLint](https://eslint.org/): The pluggable linting utility for JavaScript and JSX.
 - [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
 - [JWT](https://jwt.io/): JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.
+- [Mongoose](https://mongoosejs.com/): Elegant mongodb object modeling for node.js.
+- [Multer](https://github.com/expressjs/multer): Node.js middleware for handling `multipart/form-data`.
+- [Nodemailer](https://nodemailer.com/about/): Module for Node.js applications to allow easy as cake email sending.
 - [Nodemon](https://nodemon.io/): Nodemon is a utility that will monitor for any changes in your source and automatically restart your server.
 - [pg](https://www.npmjs.com/package/pg): Non-blocking PostgreSQL client for Node.js. Pure JavaScript and optional native libpq bindings.
 - [pg-hstore](https://www.npmjs.com/package/pg-hstore): A node package for serializing and deserializing JSON data to hstore format.
 - [Prettier](https://prettier.io/): An opinionated code formatter.
 - [Sequelize](https://sequelize.org/): Promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
+- [Sequelize CLI](https://github.com/sequelize/cli): The Sequelize CLI.
 - [Sucrase](https://sucrase.io/): Super-fast Babel alternative.
 - [Yup](https://github.com/jquense/yup): JavaScript object schema validator and object parser. 
 
