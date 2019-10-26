@@ -14,6 +14,8 @@
 - [EditorConfig](https://editorconfig.org/): EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.
 - [Mailtrap](https://mailtrap.io/): Safe Email Testing for Staging & Development.
 - [Handlebars](https://handlebarsjs.com/): Build semantic templates effectively with no frustration.
+- [Sentry](https://sentry.io): Provides open-source and hosted error monitoring that helps all software
+teams discover, triage, and prioritize errors in real-time.
 - [Redis](https://redis.io/): In-memory data structure store, used as a database, cache and message broker.
 
 ## YARN PACKAGES USED
@@ -34,6 +36,7 @@
 - [Sequelize CLI](https://github.com/sequelize/cli): The Sequelize CLI.
 - [Sucrase](https://sucrase.io/): Super-fast Babel alternative.
 - [Yup](https://github.com/jquense/yup): JavaScript object schema validator and object parser. 
+- [Youch](https://www.npmjs.com/package/youch): Pretty error reporting for Node.js
 
 ---
 
@@ -41,12 +44,12 @@
 
 ### Yarn command to install dependencies on a new project
 ```
-yarn add bcryptjs bee-queue date-fns express jsonwebtoken mongoose nodemailer pg pg-hstore sequelize yup
+yarn add bcryptjs bee-queue date-fns express express-async-errors express-handlebars jsonwebtoken mongoose multer nodemailer pg pg-hstore @sentry/node@5.7.1 sequelize youch yup
 ```
 
 ### Yarn command to install developer dependencies on a new project
 ```
-yarn add eslint nodemon prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-import sequelize-cli sucrase -D
+yarn add eslint eslint-config-airbnb-base eslint-config-prettier eslint-plugin-import eslint-plugin-prettier nodemon prettier sequelize-cli sucrase -D
 ```
 
 ### Commands to run after yarn add
