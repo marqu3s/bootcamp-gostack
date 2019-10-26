@@ -11,6 +11,7 @@
 - [Postbird](https://electronjs.org/apps/postbird): PostgreSQL GUI client.
 - [DevDocs](https://devdocs.egoist.moe/): DevDocs Desktop client.
 - [Docker](https://www.docker.com/): Container engine to automate application development and deployment.
+- [Dotenv](https://www.npmjs.com/package/dotenv): Dotenv is a zero-dependency module that loads environment variables from a .env file.
 - [EditorConfig](https://editorconfig.org/): EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.
 - [Mailtrap](https://mailtrap.io/): Safe Email Testing for Staging & Development.
 - [Handlebars](https://handlebarsjs.com/): Build semantic templates effectively with no frustration.
@@ -44,7 +45,7 @@ teams discover, triage, and prioritize errors in real-time.
 
 ### Yarn command to install dependencies on a new project
 ```
-yarn add bcryptjs bee-queue date-fns express express-async-errors express-handlebars jsonwebtoken mongoose multer nodemailer pg pg-hstore @sentry/node@5.7.1 sequelize youch yup
+yarn add bcryptjs bee-queue date-fns dotenv express express-async-errors express-handlebars jsonwebtoken mongoose multer nodemailer pg pg-hstore @sentry/node@5.7.1 sequelize youch yup
 ```
 
 ### Yarn command to install developer dependencies on a new project
