@@ -26,7 +26,7 @@ class StudentController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      res.status(400).json({ error: 'Data validation failed.' });
+      return res.status(400).json({ error: 'Data validation failed.' });
     }
 
     // Check if email is already in use
@@ -34,7 +34,9 @@ class StudentController {
       where: { email: req.body.email },
     });
     if (studentExists) {
-      res.status(400).json({ error: 'The email provided is already in use.' });
+      return res
+        .status(400)
+        .json({ error: 'The email provided is already in use.' });
     }
 
     // Student doesn't exists. Create it.
@@ -67,12 +69,12 @@ class StudentController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      res.status(400).json({ error: 'Data validation failed.' });
+      return res.status(400).json({ error: 'Data validation failed.' });
     }
 
     const student = await Student.findByPk(req.params.id);
     if (!student) {
-      res.status(400).json({ error: 'The user was not found.' });
+      return res.status(400).json({ error: 'The user was not found.' });
     }
 
     await student.update(req.body);
