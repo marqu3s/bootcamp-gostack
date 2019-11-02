@@ -154,7 +154,8 @@ class EnrollmentController {
         - Nome do plano: ${plan.title}<br>
         - Data de término: ${formattedEndDate}<br>
         - Valor pago: ${totalPrice}<br><br>
-        Bora malhar!`,
+        Bora malhar!<br>
+        Equipe GymPoint`,
     });
 
     return res.json(enrollment);
