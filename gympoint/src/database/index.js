@@ -4,12 +4,13 @@ import databaseConfig from '../config/database';
 // Import all models here.
 import User from '../app/models/User';
 import Student from '../app/models/Student';
+import StudentCheckin from '../app/models/StudentCheckin';
 import Plan from '../app/models/Plan';
 import Enrollment from '../app/models/Enrollment';
 
 // Include all models in this array so they can be initialized with the
 // database connection.
-const models = [User, Student, Plan, Enrollment];
+const models = [User, Student, StudentCheckin, Plan, Enrollment];
 
 class Database {
   constructor() {
