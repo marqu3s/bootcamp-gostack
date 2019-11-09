@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, Filter, IssueList, Paginator } from './styles';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -19,34 +19,69 @@ export default class Repository extends Component {
     repository: {},
     issues: [],
     loading: true,
+    issueState: 'closed',
+    page: 1,
+    per_page: 10,
+    links: [],
   };
+
+  repoName = '';
+
+  issueStateOptions = [
+    { code: 'all', label: 'All' },
+    { code: 'open', label: 'Open' },
+    { code: 'closed', label: 'Closed' },
+  ];
 
   async componentDidMount() {
     const { match } = this.props;
-
-    const repoName = decodeURIComponent(match.params.repository);
+    this.repoName = decodeURIComponent(match.params.repository);
 
     // const response = await api.get(`/repos/${repo.name}`);
     // const issues = await api.get(`/repos/${repo.name}/issues`);
     const [repository, issues] = await Promise.all([
-      api.get(`/repos/${repoName}`),
-      api.get(`/repos/${repoName}/issues`, {
-        params: {
-          state: 'open',
-          per_page: 10,
-        },
-      }),
+      this.getRepoInfo(),
+      this.getRepoIssues(),
     ]);
+
+    const paginationLinks = issues.headers.link.split(',').map(url => url.trim());
 
     this.setState({
       repository: repository.data,
       issues: issues.data,
+      links: paginationLinks,
       loading: false,
     });
   }
 
+  getRepoInfo = async () => {
+    return await api.get(`/repos/${this.repoName}`);
+  }
+
+  getRepoIssues = async () => {
+    const { issueState, page, per_page } = this.state;
+
+    return await api.get(`/repos/${this.repoName}/issues`, {
+      params: {
+        state: issueState,
+        per_page: per_page,
+        page: page,
+      },
+    });
+  }
+
+  handleIssueStateFilterChange = async e => {
+    this.setState({ issueState: e.target.value });
+
+    const issues = await this.getRepoIssues();
+
+    this.setState({
+      issues: issues.data,
+    });
+  }
+
   render() {
-    const { repository, issues, loading } = this.state;
+    const { repository, issues, loading, issueState } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -61,6 +96,15 @@ export default class Repository extends Component {
           <p>{repository.description}</p>
         </Owner>
 
+        <Filter>
+          <label>Estado do issue: </label>
+          <select name="issueState" value={issueState} onChange={this.handleIssueStateFilterChange}>
+            {this.issueStateOptions.map(option => (
+              <option key={option.code} value={option.code}>{option.label}</option>
+            ))}
+          </select>
+        </Filter>
+
         <IssueList>
           {issues.map(issue => (
             <li key={String(issue.id)}>
@@ -69,7 +113,7 @@ export default class Repository extends Component {
                 <strong>
                   <a href={issue.html_url}>{issue.title}</a>
                   {issue.labels.map(label => (
-                    <span key={String(label.id)}>{label.name}</span>
+                    <span key={String(label.id)} issueColor={'#' + label.color}>{label.name}</span>
                   ))}
                 </strong>
                 <p>{issue.user.login}</p>
@@ -77,6 +121,10 @@ export default class Repository extends Component {
             </li>
           ))}
         </IssueList>
+
+        <Paginator>
+
+        </Paginator>
       </Container>
     );
   }

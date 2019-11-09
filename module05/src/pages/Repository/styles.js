@@ -6,6 +6,7 @@ export const Loading = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100vh;
 `;
 
@@ -39,6 +40,12 @@ export const Owner = styled.header`
     text-align: center;
     max-width: 400px;
   }
+`;
+
+export const Filter = styled.div`
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
 `;
 
 export const IssueList = styled.ul`
@@ -82,7 +89,7 @@ export const IssueList = styled.ul`
       }
 
       span {
-        background: #eee;
+        background: ${props => props.issueColor || '#eee'};
         color: #333;
         border-radius: 2px;
         font-size: 12px;
@@ -100,3 +107,5 @@ export const IssueList = styled.ul`
     }
   }
 `;
+
+export const Paginator = styled.ul``;

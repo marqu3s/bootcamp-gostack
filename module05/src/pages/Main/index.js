@@ -12,6 +12,7 @@ export default class Main extends Component {
     newRepo: '',
     repositories: [],
     loading: false,
+    notFound: false,
   };
 
   // Load data from localStorage
@@ -39,20 +40,39 @@ export default class Main extends Component {
 
     this.setState({ loading: true });
     const { newRepo, repositories } = this.state;
-    const response = await api.get(`/repos/${newRepo}`);
-    const data = {
-      name: response.data.full_name,
-    };
+
+    try {
+      /** Check if repo is already in the list */
+      const repoExists = repositories.find(item => {
+        return item.name === newRepo;
+      });
+      if (repoExists) {
+        throw new Error('Repositório duplicado.');
+      }
+
+      const response = await api.get(`/repos/${newRepo}`);
+      const data = {
+        name: response.data.full_name,
+      };
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        notFound: false,
+      });
+    } catch (err) {
+      this.setState({
+        notFound: true,
+      });
+      console.log(err);
+    }
 
     this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
       loading: false,
     });
   };
 
   render() {
-    const { newRepo, repositories, loading } = this.state;
+    const { newRepo, repositories, loading, notFound } = this.state;
 
     return (
       <Container>
@@ -67,7 +87,9 @@ export default class Main extends Component {
             placeholder="Adicionar repositório"
             value={newRepo}
             onChange={this.handleInputChange}
+            className={notFound ? 'not-found' : ''}
           />
+
           <SubmitButton loading={loading}>
             {loading ? (
               <FaSpinner color="#FFF" size={14} />
