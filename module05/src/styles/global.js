@@ -25,5 +25,14 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
+    padding: 5px 8px;
+    border: 0;
+    border-radius: 4px;
+  }
+
+  select {
+    background-color: #7159c1;
+    color: #fff;
+    padding: 5px 8px;
   }
 `;

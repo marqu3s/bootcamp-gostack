@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, Owner, Filter, IssueList, Paginator } from './styles';
+import { Loading, Owner, Filter, IssueList, IssueLabel, Paginator } from './styles';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -22,7 +22,6 @@ export default class Repository extends Component {
     issueState: 'closed',
     page: 1,
     per_page: 10,
-    links: [],
   };
 
   repoName = '';
@@ -39,65 +38,79 @@ export default class Repository extends Component {
 
     // const response = await api.get(`/repos/${repo.name}`);
     // const issues = await api.get(`/repos/${repo.name}/issues`);
-    const [repository, issues] = await Promise.all([
+    await Promise.all([
       this.getRepoInfo(),
       this.getRepoIssues(),
     ]);
 
-    const paginationLinks = issues.headers.link.split(',').map(url => url.trim());
-
     this.setState({
-      repository: repository.data,
-      issues: issues.data,
-      links: paginationLinks,
       loading: false,
     });
   }
 
   getRepoInfo = async () => {
-    return await api.get(`/repos/${this.repoName}`);
+    const repository = await api.get(`/repos/${this.repoName}`);
+
+    this.setState({
+      ...this.state,
+      repository: repository.data,
+    });
   }
 
   getRepoIssues = async () => {
     const { issueState, page, per_page } = this.state;
 
-    return await api.get(`/repos/${this.repoName}/issues`, {
+    const issues = await api.get(`/repos/${this.repoName}/issues`, {
       params: {
         state: issueState,
         per_page: per_page,
         page: page,
       },
     });
+
+    this.setState({ issues: issues.data });
   }
 
   handleIssueStateFilterChange = async e => {
-    this.setState({ issueState: e.target.value });
+    await this.setState({ issueState: e.target.value });
 
-    const issues = await this.getRepoIssues();
+    await this.getRepoIssues();
+  }
 
-    this.setState({
-      issues: issues.data,
-    });
+  handleNextPage = async e => {
+    await this.setState((state, props) => ({
+      page: state.page + 1,
+    }));
+
+    this.getRepoIssues();
+  }
+
+  handlePreviousPage = async e => {
+    await this.setState((state, props) => ({
+      page: state.page - 1,
+    }));
+
+    this.getRepoIssues();
   }
 
   render() {
-    const { repository, issues, loading, issueState } = this.state;
+    const { repository, issues, loading, issueState, page } = this.state;
 
     if (loading) {
-      return <Loading>Carregando</Loading>;
+      return <Loading>Loading...</Loading>;
     }
 
     return (
       <Container>
         <Owner>
-        <Link to="/">Voltar aos repositórios</Link>
+        <Link to="/">Back to repositories</Link>
           <img src={repository.owner.avatar_url} alt={repository.owner.login} />
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
 
         <Filter>
-          <label>Estado do issue: </label>
+          <label>Issue state: </label>
           <select name="issueState" value={issueState} onChange={this.handleIssueStateFilterChange}>
             {this.issueStateOptions.map(option => (
               <option key={option.code} value={option.code}>{option.label}</option>
@@ -113,7 +126,7 @@ export default class Repository extends Component {
                 <strong>
                   <a href={issue.html_url}>{issue.title}</a>
                   {issue.labels.map(label => (
-                    <span key={String(label.id)} issueColor={'#' + label.color}>{label.name}</span>
+                    <IssueLabel key={String(label.id)} issueColor={'#' + label.color}>{label.name}</IssueLabel>
                   ))}
                 </strong>
                 <p>{issue.user.login}</p>
@@ -123,7 +136,12 @@ export default class Repository extends Component {
         </IssueList>
 
         <Paginator>
-
+            <button type="button" onClick={this.handlePreviousPage} disabled={page === 1}>
+              Prev ({page - 1})
+            </button>
+            <button type="button" onClick={this.handleNextPage}>
+              Next ({page + 1})
+            </button>
         </Paginator>
       </Container>
     );
