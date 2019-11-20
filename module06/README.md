@@ -88,6 +88,9 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
+    'react/state-in-constructor': 'off',
+    'react/static-property-placement': 'off',
+    'react/sort-comp': 'off',
     'react/jsx-filename-extension': [
       'warn',
       {
@@ -163,4 +166,10 @@ yarn add styled-components
 
 ```shell
 yarn add axios
+```
+
+# Async Storage
+
+```shell
+yarn add @react-native-community/async-storage
 ```
