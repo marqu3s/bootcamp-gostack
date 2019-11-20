@@ -103,7 +103,7 @@ Edit the file `.prettierrc.js` to be like this:
 
 ```js
 module.exports = {
-  bracketSpacing: false,
+  bracketSpacing: true,
   jsxBracketSameLine: true,
   singleQuote: true,
   trailingComma: 'es5',
@@ -142,7 +142,25 @@ adb reverse tcp:9090 tcp:9090
 
 # React Navigation
 
+Check the documentation for the current version at https://reactnavigation.org/docs/en/getting-started.html
+
+Mostly it envolves installing the dependencies, like shown bellow:
+
 ```shell
 yarn add react-navigation
 yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23
+```
+
+And editing some files, so check the documentation carefully.
+
+# Styled Components
+
+```shell
+yarn add styled-components
+```
+
+# Axios
+
+```shell
+yarn add axios
 ```
