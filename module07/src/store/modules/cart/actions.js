@@ -1,3 +1,7 @@
+/**
+ * Listened in Saga.
+ * @param {*} id
+ */
 export function addToCartRequest(id) {
   return {
     type: '@cart/ADD_REQUEST',
@@ -5,6 +9,10 @@ export function addToCartRequest(id) {
   };
 }
 
+/**
+ * Called from Saga.
+ * @param {*} product
+ */
 export function addToCartSuccess(product) {
   return {
     type: '@cart/ADD_SUCCESS',
@@ -19,9 +27,25 @@ export function removeFromCart(id) {
   };
 }
 
-export function updateAmount(id, amount) {
+/**
+ * Listened in Saga.
+ * @param {*} product
+ */
+export function updateAmountRequest(id, amount) {
   return {
-    type: '@cart/UPDATE_AMOUNT',
+    type: '@cart/UPDATE_AMOUNT_REQUEST',
+    id,
+    amount,
+  };
+}
+
+/**
+ * Called from Saga.
+ * @param {*} product
+ */
+export function updateAmountSuccess(id, amount) {
+  return {
+    type: '@cart/UPDATE_AMOUNT_SUCCESS',
     id,
     amount,
   };
